@@ -1,0 +1,51 @@
+**How to pull from github to VPS:**
+
+1. SSH to VPS server: ssh root@server.learningplanetedu.com password:p0N#zaiqZ88q
+2. cd /home/learnjn9/public_html/smartynight/sn
+3. git pull origin master
+4. key is "happy geek bears"
+5. bundle install
+6. rake db:migrate
+7. service httpd restart
+
+**How to add custom references to assets**
+
+When using the asset pipeline, paths to assets must be re-written and sass-rails provides -url and -path helpers (hyphenated in Sass, underscored in Ruby) for the following asset classes: image, font, video, audio, JavaScript and stylesheet.
+
+**In CSS or SASS: **
+
+  *image-url("rails.png") becomes url(/assets/rails.png)
+  *image-path("rails.png") becomes "/assets/rails.png".
+
+The more generic form can also be used:
+
+   *asset-url("rails.png") becomes url(/assets/rails.png)
+   *asset-path("rails.png") becomes "/assets/rails.png"
+
+
+**In Ruby:**
+
+*<%= asset_path 'image.png' %> becomes "/assets/image.png"
+
+And these include the HTML code for the type of file (img, link or script):
+
+*<%= image_tag "rails.png" %>
+*<%= stylesheet_link_tag "application", media: "all" %>
+*<%= javascript_include_tag "application" %>
+
+
+**Link to SRS:**
+
+https://docs.google.com/document/d/1zgeBD36zi_-eZCxAPwAk09SFLVmwr-BrfTiO_rjk4fI/edit
+
+
+**Link to Wireframe:**
+
+http://editor.wix.com/html/editor/web/renderer/edit/35ed3ff5-1196-4a18-b167-9aa7773ad295?metaSiteId=5edb82c0-3628-4f5d-9b11-2410c11125fe&editorSessionId=74AAFE22-BE1C-4CAF-8A3C-B94967A38425
+
+email: jaircc91@hotmail.com
+
+password: webbuilder
+
+**Link to Font Hex code:**
+https://geekbears.atlassian.net/browse/SN-120

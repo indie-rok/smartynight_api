@@ -1,0 +1,22 @@
+class VenueSerializer < ActiveModel::Serializer
+  attributes :name,
+  		:id,
+		:phone,
+		:venue_type,
+		:city,
+		:state,
+		:zip_code,
+		:street_address,
+		:dresscode,
+		:popular_drink,
+		:best_for,
+		:url ,
+		:user_id,
+		:music_genre ,
+		:live,
+		:average_rating,
+		:user_count,
+		:venue_photos,
+		:avatar_picture,
+		:parties
+end
