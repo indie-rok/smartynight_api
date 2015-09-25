@@ -11,9 +11,9 @@ class Api::SessionsController < ApplicationController
 	      #sign_in user, store: false
 	      user.authentication_token = Devise.friendly_token
 	      user.save
-	      render json: {authentication_token: user.authentication_token,type: 'email'}, status: 200, location: 'http://google.com'
+	      render json: {authentication_token: user.authentication_token,type: 'email', location: 'user'}, status: 201
 	    else
-	      render json: { errors: "Invalid email or password" }, location: 'http://google.com'
+	      render json: { errors: "Invalid email or password",location:'login' }
 	    end
 	end
 
