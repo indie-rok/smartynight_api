@@ -5,7 +5,13 @@ class Api::SessionsController < ApplicationController
  	def create
     user_password = params[:password]
     user_email = params[:email]
+
     user = user_email.present? && User.find_by(email: user_email)
+
+    	if user.nil?
+    		render json: {errors:'User does not exists', location: 'login'}
+    		return
+    	end
 
 	    if user.valid_password? user_password
 	      #sign_in user, store: false
@@ -13,7 +19,7 @@ class Api::SessionsController < ApplicationController
 	      user.save
 	      render json: {authentication_token: user.authentication_token,type: 'email', location: 'user'}, status: 201
 	    else
-	      render json: { errors: "Invalid email or password",location:'login' }
+	      render json: { errors: "Invalid password",location:'login' }
 	    end
 	end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905024724) do
+ActiveRecord::Schema.define(version: 20150925195957) do
 
   create_table "api_tokens", force: :cascade do |t|
     t.string   "token"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20150905024724) do
   end
 
   add_index "parties", ["venue_id"], name: "index_parties_on_venue_id"
+
+  create_table "recent_searches", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "venue_id"
+  end
+
+  add_index "recent_searches", ["user_id"], name: "index_recent_searches_on_user_id"
+  add_index "recent_searches", ["venue_id"], name: "index_recent_searches_on_venue_id"
 
   create_table "states", force: :cascade do |t|
     t.datetime "created_at", null: false

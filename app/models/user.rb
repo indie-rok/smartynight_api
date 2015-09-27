@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
  
   has_one :venue
   has_one :dancer
+  has_many :recent_searches
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
       )
     end
   end
+
 
    def is_venue?
       self.dancer.nil?

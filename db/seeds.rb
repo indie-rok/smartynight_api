@@ -109,3 +109,8 @@ v2.parties.create([
 		description: 'draft cover',
 		status: 'draft',
 	])
+
+s1 = RecentSearch.create([
+		user_id: 1,
+		venue_id: 1
+	])

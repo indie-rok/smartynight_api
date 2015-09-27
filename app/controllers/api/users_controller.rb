@@ -15,36 +15,47 @@ class Api::UsersController < ApplicationController
 
 	#GET /user/id
 	def show
-		render json: @user
+		render :json => @user,  :only => [:email, :gender,:age_range,:avatar_url],
+		:include => { :recent_searches => {:include => :venue ,:only => :venue } }
 	end
 
 	#POST /user
 	def create
 
-		@user = User.where(:email => params[:email] ).first_or_create do |user|
+		user = User.where(:email => params[:email] ).first_or_create do |user|
 			user.password = params[:password]
 			user.verified = false 
 			user.wants_newsletter = true
 			user.user_type = params[:user_type]
 
-			if user.user_type == 'venue'
-				user.build_venue(
+			if params[:user_type] == 'venue'
+				user.create_venue(
 					name: params[:venue_name],
-					type: params[:venue_type],
+					venue_type: params[:venue_type],
 					street_address: params[:venue_street_address],
 					city: params[:venue_city],
+					state: 'california',
 					zip_code: params[:venue_zip],
 					phone: params[:venue_phone]
 				)
-			elsif user.user_type == 'dancer'
-				user.build_dancer(
+			elsif params[:user_type] == 'dancer'
+				user.create_dancer(
+					username: params[:dancer_username],
 					gender: params[:dancer_gender],
 					age_range: params[:dancer_age_range]
 				)
 			end
+
+			user.authentication_token = Devise.friendly_token
+			@created = true
 		end
 
-		render json: @user, status: 201
+		if @created
+			render json: {status: 'created', authentication_token: user.authentication_token ,type: 'email', location: 'user'}
+		else
+			render json: {status:'error', location: 'login', error:'User exists'}
+		end
+		
 	end
 
 	#PATCH /user/id

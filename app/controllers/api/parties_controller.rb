@@ -3,12 +3,16 @@
 	#remove in production
   	skip_before_filter :verify_authenticity_token
 
-  	before_action :set_user, only: [:create,:show, :edit, :update, :destroy]
+  	before_action :set_user, only: [:create,:show, :edit, :update, :destroy,:new]
 
 	def index
 		@parties = Party.where(status:'published')
 		render :json => @parties.to_json(:include => { :venue => { :only => [:name] } })
+	end
 
+	def new
+		render :json => @user, only: [:avatar_url,:email],
+		:include => { :venue => {:include => :parties ,:only => :venue } }
 	end
 
 	def create

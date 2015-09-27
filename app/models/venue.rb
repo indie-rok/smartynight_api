@@ -1,6 +1,8 @@
 class Venue < ActiveRecord::Base
 
 	belongs_to :user
+
+	has_many :recent_searches
 	#belongs_to :city
 	has_many :venue_photos
 	has_many :venue_ratings
