@@ -3,6 +3,12 @@ class Api::ClaimsController < ApplicationController
 	#remove in production
  	skip_before_filter :verify_authenticity_token
 
+
+ 	def index
+ 		@venues = Venue.where user_id: nil
+ 		render json: @venues
+ 	end
+
 	def create
 		@venue  = Venue.find(params[:id])
 

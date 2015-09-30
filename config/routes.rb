@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
     resources :likes , only: [:create,:index]
     delete 'likes/:venue_id', to: 'likes#destroy'
-    resources :claims, only: [:create]
+    resources :claims, only: [:create,:index]
     post 'emails', to: 'emails#contact_email'
     resources :parties
     get 'cities', to: 'cities#index'

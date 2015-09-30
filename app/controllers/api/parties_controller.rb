@@ -16,22 +16,21 @@
 	end
 
 	def create
-
 		p = Party.new
 		p.img_url = params[:img_url]
 		p.name = params[:name]
-		p.type = params[:type]
+		p.party_type = params[:party_type]
 		p.date = params[:date]
 		p.start_time = params[:start_time]
 		p.end_time = params[:end_time]
 		p.cover = params[:cover]
-		p.description = params[:description]
+		p.description  = params[:description]
 		p.status = params[:status]
-		p.venue_id = @user.id
+		p.venue_id = @user.venue.id
 		p.save
 
 		if p.save
-			render json: {msg: 'Created'}
+			render json: {msg: 'Created', location: 'parties/new'}
 		else
 			render json: {error: p.errors}
 		end
